@@ -19,6 +19,16 @@ console.log(octal == hex);    // true
 console.log(1 == 1.0); // true
 
 var result = 4 / 2;
-console.log(result);
+console.log(result); // 2
 result = 3 / 2;
-console.log(result);
+console.log(result); // 1.5
+
+// 특별한 값 표현
+var pInf = 10 / 0;  // 양의 무한대
+console.log(pInf);  // Infinity
+
+var nInf = 10 / -0; // 음의 무한대
+console.log(nInf);  // -Infinity
+
+var nan = 1 * 'string'; // 산술 연산 불가
+console.log(nan);       // NaN
