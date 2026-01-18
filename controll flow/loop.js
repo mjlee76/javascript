@@ -84,3 +84,26 @@ outer: for (var i = 0; i < 3; i++) {
 
 console.log('Done!');
 
+
+// break 문은 레이블 문 뿐만이 아니라 반복문, 
+// switch 문에서도 사용할 수 있다. 
+// 이 경우에는 break 문에 레이블 식별자를 지정하지 않는다. 
+// break 문은 반복문을 더 이상 진행하지 않아도 될 때 
+// 불필요한 반복을 회피할 수 있어 유용하다.
+
+// 아래는 문자열에서 특정 문자의 인덱스(위치)를 검색하는 예제이다.
+var string = 'Hello World.';
+var index;
+
+for(var i = 0; i < string.length; i++) {
+    if(string[i] === 'l'){
+        index = i;
+        break; // 반복문을 탈출한다.
+    }
+}
+
+console.log(index); // 2
+
+// 참고로 String.prototype.indexOf 메소드를 사용해도 같은 동작을 한다.
+console.log(string.indexOf('l')); // 2
+
