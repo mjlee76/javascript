@@ -229,12 +229,12 @@ var person = {
 
 console.log(person);
 
-console.log(person.first-name);    // NaN: undefined-undefined
-console.log(person[first-name]);   // ReferenceError: first is not defined
+//console.log(person.first-name);    // NaN: undefined-undefined
+//console.log(person[first-name]);   // ReferenceError: first is not defined
 console.log(person['first-name']); // 'Ung-mo'
 
 console.log(person.gender);    // 'male'
-console.log(person[gender]);   // ReferenceError: gender is not defined
+//console.log(person[gender]);   // ReferenceError: gender is not defined
 console.log(person['gender']); // 'male'
 
 console.log(person['1']); // 10
@@ -263,3 +263,238 @@ var person = {
 };
 
 console.log(person.age); // undefined
+
+
+
+
+
+
+// 프로퍼티 값 갱신
+// 객체가 소유하고 있는 프로퍼티에 새로운 값을 할당하면 
+// 프로퍼티 값은 갱신된다.
+
+var person = {
+  'first-name': 'Ung-mo',
+  'last-name': 'Lee',
+  gender: 'male'
+};
+
+person['first-name'] = 'Kim';
+console.log(person['first-name']); // 'Kim'
+
+
+
+
+// 프로퍼티 동적 생성
+// 객체가 소유하고 있지 않은 프로퍼티 키에 값을 할당하면 하면 
+// 주어진 키와 값으로 프로퍼티를 생성하여 객체에 추가한다.
+
+person.age = 20;
+console.log(person.age); // 20
+
+
+
+
+
+// 프로퍼티 삭제
+// delete 연산자를 사용하면 객체의 프로퍼티를 삭제할 수 있다.
+// 이때 피연산자는 프로퍼티 키이어야 한다.
+
+delete person.gender;
+console.log(person.gender); // undefined
+
+
+
+
+// for-in 문
+// for-in 문을 사용하면 객체(배열 포함)에 포함된
+// 모든 프로퍼티에 대해 루프를 수행할 수 있다.
+
+// prop에 객체의 프로퍼티 이름이 반환된다. 단, 순서는 보장되지 않는다.
+console.log('for-in');
+for (var prop in person) {
+  console.log(prop + ': ' + person[prop]);
+}
+
+var array = ['one', 'two'];
+
+// index에 배열의 경우 인덱스가 반환된다.
+for (var index in array) {
+  console.log(index + ': ' + array[index]);
+}
+
+/*
+0: one
+1: two
+*/
+
+// for-in 문은 객체의 문자열 키(key)를 순회하기 위한 문법이다. 
+// 배열에는 사용하지 않는 것이 좋다. 이유는 아래와 같다.
+
+// 1. 객체의 경우, 프로퍼티의 순서가 보장되지 않는다. 
+// 그 이유는 원래 객체의 프로퍼티에는 순서가 없기 때문이다. 
+// 배열은 순서를 보장하는 데이터 구조이지만 
+// 객체와 마찬가지로 순서를 보장하지 않는다.
+
+// 2. 배열 요소들만을 순회하지 않는다.
+
+array.name = 'my array';
+
+for (var index in array) {
+  console.log(index + ': ' + array[index]);
+}
+
+/*
+0: one
+1: two
+name: my array
+ */
+
+// 이와 같은 for-in 문의 단점을 극복하기 위해 ES6에서 for-of 문이 추가되었다.
+
+const array2 = [1, 2, 3];
+array2.name = 'my array';
+
+for (const value of array2) {
+  console.log(value);
+}
+
+/*
+1
+2
+3
+*/
+
+for (const [index, value] of array2.entries()) {
+  console.log(index, value);
+}
+
+/*
+0 1
+1 2
+2 3
+*/
+
+// for-in 문은 객체의 프로퍼티를 순회하기 위해 사용하고
+// for-of 문은 배열의 요소를 순회하기 위해 사용한다.
+
+
+
+
+
+
+// Pass-by-reference
+
+/*
+ object type을 객체 타입 또는 참조 타입이라 한다. 
+ 참조 타입이란 객체의 모든 연산이 실제값이 아닌 참조값으로 처리됨을 의미한다.
+ 원시 타입은 값이 한번 정해지면 변경할 수 없지만(immutable), 객체는 
+ 프로퍼티를 변경, 추가, 삭제가 가능하므로 변경 가능(mutable)한 값이라 할 수 있다.
+
+ 따라서 객체 타입은 동적으로 변화할 수 있으므로 
+ 어느 정도의 메모리 공간을 확보해야 하는지 예측할 수 없기 때문에 
+ 런타임에 메모리 공간을 확보하고 메모리의 힙 영역(Heap Segment)에 저장된다.
+
+ 이에 반해 원시 타입은 값(value)으로 전달된다. 
+ 즉, 복사되어 전달된다. 이를 pass-by-value라 한다
+*/
+
+var foo = {
+  val: 10
+}
+
+var bar = foo;
+console.log(foo.val, bar.val); // 10 10
+console.log(foo === bar);      // true
+
+bar.val = 20;
+console.log(foo.val, bar.val); // 20 20
+console.log(foo === bar)       // true
+
+// foo와 bar는 객체의 참조값(메모리 주소)을 같이 바라보고 있다.
+// 그래서 변경된것도 함께 공유한다.
+// 아래와는 차이가 있다.
+
+var foo = { val: 10 };
+var bar = { val: 10 };
+
+console.log(foo.val, bar.val); // 10 10
+console.log(foo === bar);      // false
+
+var baz = bar;
+
+console.log(baz.val, bar.val); // 10 10
+console.log(baz === bar);      // true
+
+// foo와 bar는 내용은 같지만 별개의 객체를 생성했으므로 
+// 참조값(메모리 주소)는 동일하지 않다.
+
+// 변수 baz에는 변수 bar의 값을 할당하였다. 
+// baz와 bar는 동일한 객체 참조값을 저장하고 있다.
+
+var a = {}, b = {}, c = {}; // a, b, c는 각각 다른 빈 객체를 참조
+console.log(a === b, a === c, b === c); // false false false
+
+a = b = c = {}; // a, b, c는 모두 같은 빈 객체를 참조
+console.log(a === b, a === c, b === c); // true true true
+
+
+
+
+
+// Pass-by-value
+
+/*
+원시 타입은 값(value)으로 전달된다. 즉, 값이 복사되어 전달된다. 
+이를 pass-by-value(값에 의한 전달)라 한다. 
+원시 타입은 값이 한번 정해지면 변경할 수 없다.(immutable) 
+또한 이들 값은 런타임(변수 할당 시점)에 메모리의 스택 영역(Stack Segment)에 
+고정된 메모리 영역을 점유하고 저장된다.
+*/
+
+//pass-by-value
+var a = 1;
+var b = a;
+
+console.log(a, b);    // 1 1
+console.log(a === b); // true
+
+a = 10;
+console.log(a, b);    // 10 1
+console.log(a === b); // false
+
+
+
+
+
+// 객체의 분류
+/*
+[ Object ] - > Host Object
+     |
+     v
+Built-in Objcet - > standard Built-in Object
+     |
+     v
+Native Object - > DOM (Document Object Model)
+     |
+     v
+BOM (Browser Object Model)
+
+
+Built-in Object(내장 객체)는 
+웹페이지 등을 표현하기 위한 공통의 기능을 제공한다. 
+웹페이지가 브라우저에 의해 로드되자마자 별다른 행위없이 바로 사용이 가능하다. 
+Built-in Object는 아래와 같이 구분할 수 있다.
+
+- Standard Built-in Objects (or Global Objects)
+- BOM (Browser Object Model)
+- DOM (Document Object Model)
+
+Standard Built-in Objects(표준 빌트인 객체)를 제외한 
+BOM과 DOM을 Native Object라고 분류하기도 한다.
+
+또한 사용자가 생성한 객체를 Host Object(사용자 정의 객체)라 한다.
+constructor 혹은 객체리터럴을 통해 사용자가 
+객체를 정의하고 확장시킨 것들이기 때문에 
+Built-in Object 와 Native Object가 구성된 이후에 구성된다.
+*/

@@ -23,4 +23,21 @@ function foo () {
     return
     {}
 }
-console.log(foo());
+console.log(foo()); // undefined
+
+// 문에는 표현식인 문과 표현식이 아닌 문이 있다. 
+// 예를 들어 선언문은 값으로 평가될 수 없다. 
+// 따라서 표현식이 아닌 문이다. 
+// 하지만 할당문은 그 자체가 표현식인 문이다.
+
+// 선언문(Declaration statement)
+var x = 5 * 10; // 표현식 x = 5 * 10를 포함하는 문이다.
+
+// 할당문(Assignment statement)
+x = 100; // 이 자체가 표현식이지만 완전한 문이기도 하다.
+
+// 선언문은 아래처럼 값으로 사용할 수 없다.
+//var foo = var x = 5 * 10;
+
+// 할당문은 표현식인 문이기 때문에 값처럼 사용할 수 있다.
+var foo = x = 100;

@@ -7,6 +7,6 @@ var person = {
 };
 
 console.log(typeof person); // object
-console.log(person);
+console.log(person); // { name: 'Lee', gender: 'male', sayHello: [Function: sayHello] }
 
-person.sayHello();
+person.sayHello(); // Hi! My name is Lee

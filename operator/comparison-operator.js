@@ -23,3 +23,31 @@ null == undefined   // true
 // 이유
 5 == '5'   // true
 5 === '5'  // false
+
+// 부동등 비교
+5 != 8    // true
+5 != 5    // false
+5 != '5'  // false
+
+// 불일치 비교
+5 !== 8   // true
+5 !== 5   // false
+5 !== '5' // true
+
+
+// 대소 관계 비교
+5 > 0    // true
+5 > 5    // false
+5 > 8    // false
+
+5 < 0    // false
+5 < 5    // false
+5 < 8    // true
+
+5 >= 0   // true
+5 >= 5   // true
+5 >= 8   // false
+
+5 <= 0   // false
+5 <= 5   // true
+5 <= 8   // true
