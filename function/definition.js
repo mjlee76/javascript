@@ -157,4 +157,8 @@ Function 생성자 함수로 함수를 생성하는 문법은 다음과 같다.
 // new Function(arg1, arg2, ... , argN, functionBody)
 
 var square = new Function('number', 'return number * number');
-console.log(square(10));
+console.log(square(10)); // 100
+
+// Function 생성자 함수로 함수를 생성하는 방식은 일반적으로 사용하지 않는다.
+
+
